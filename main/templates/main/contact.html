@@ -29,21 +29,21 @@
             <i class="flaticon-address"></i>
             <div class="contact-text">
               <h2>Location</h2>
-              <p>Alvi Chowk, Bank Road, Mandi Bahauddin</p>
+              <p>Shafie Plaza Gajju Matta Lahore</p>
             </div>
           </div>
           <div class="contact-item">
             <i class="flaticon-call"></i>
             <div class="contact-text">
               <h2>Phone</h2>
-              <p>+92 306 6872300</p>
+              <p>+92 315 5098389</p>
             </div>
           </div>
           <div class="contact-item">
             <i class="flaticon-send-mail"></i>
             <div class="contact-text">
               <h2>Email</h2>
-              <p>muhammadmazhar097@gmail.com</p>
+              <p>labbaikmediacellstudio@gmail.com</p>
             </div>
           </div>
         </div>
@@ -51,17 +51,22 @@
       <div class="col-md-6">
         <div class="contact-form">
           <div id="success"></div>
-          <form name="sentMessage" id="contactForm" novalidate="novalidate">
+          <form
+            name="sentMessage"
+            method="POST"
+            id="contactForm"
+          >
+            {% csrf_token %}
             <div class="control-group">
               <input
                 type="text"
                 class="form-control"
                 id="name"
+                name="username"
                 placeholder="Your Name"
-                required="required"
                 data-validation-required-message="Please enter your name"
                 style="color: black"
-              />
+                required />
               <p class="help-block text-danger"></p>
             </div>
             <div class="control-group">
@@ -69,11 +74,11 @@
                 type="email"
                 class="form-control"
                 id="email"
+                name="email"
                 placeholder="Your Email"
-                required="required"
                 data-validation-required-message="Please enter your email"
                 style="color: black"
-              />
+                required />
               <p class="help-block text-danger"></p>
             </div>
             <div class="control-group">
@@ -81,22 +86,22 @@
                 type="text"
                 class="form-control"
                 id="subject"
+                name="subject"
                 placeholder="Subject"
-                required="required"
                 data-validation-required-message="Please enter a subject"
                 style="color: black"
-              />
+              required />
               <p class="help-block text-danger"></p>
             </div>
             <div class="control-group">
               <textarea
                 class="form-control"
                 id="message"
+                name="usermessage"
                 placeholder="Message"
-                required="required"
                 data-validation-required-message="Please enter your message"
                 style="color: black"
-              ></textarea>
+                required /></textarea>
               <p class="help-block text-danger"></p>
             </div>
             <div>

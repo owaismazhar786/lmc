@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from . models import Contact
 
 
 def home(request):
@@ -22,4 +23,15 @@ def shop(request):
 
 
 def contact(request):
+    if request.method == 'POST':
+        contact = Contact()
+        name = request.POST.get('username')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('usermessage')
+        contact.name = name
+        contact.email = email
+        contact.subject = subject
+        contact.message = message
+        contact.save()
     return render(request, 'main/contact.html')
