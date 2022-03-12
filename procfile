@@ -1,1 +1,1 @@
-web: gunicorn lmc.wsgi
+web: waitress-serve --port=$PORT lmc.wsgi:application
