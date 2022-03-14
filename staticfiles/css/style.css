@@ -153,7 +153,7 @@ a:focus {
 /**********************************/
 .nav-bar {
   position: relative;
-  background: #ffffff;
+  background: #030f27;
   transition: 0.3s;
 }
 
@@ -1924,7 +1924,7 @@ a:focus {
 }
 
 .contact .col-md-6:last-child {
-  background: deepskyblue;
+  background: #030f27;
 }
 
 .contact .contact-info {

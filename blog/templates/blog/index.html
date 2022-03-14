@@ -1,0 +1,60 @@
+{% extends 'main/main.html' %} {% load static %} {%block content %}
+<!-- Page Header Start -->
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2>Our Blog</h2>
+      </div>
+      <div class="col-12">
+        <a href="/">Home</a>
+        <a href="/blog">Our Blog</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Blog Start -->
+<div class="blog">
+  <div class="container">
+    <div class="section-header text-center">
+      <p>Latest Blog</p>
+      <h2>Latest From Our Blog</h2>
+    </div>
+    <div class="container">
+      <div class="row my-2">
+        {% for post in post_list %}
+
+        <div class="col-md-6">
+          <div
+            class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+          >
+            <div class="col p-3 d-flex flex-column position-static">
+              <img
+                src="/media/{{post.thumbnail}}"
+                class="img-fluid"
+                style="width: 200; height: 200"
+                aria-label="Placeholder: Thumbnail"
+              />
+              <h3 class="mb-4">{{post.title}}</h3>
+              <div class="mb-4 text-muted">
+                <small>{{ post.author }} | {{ post.created_on}} </small>
+              </div>
+              <p class="card-text mb-4 text-justify">
+                {{post.content|slice:":100" }}
+              </p>
+              <a href="{{post.slug}}" class="stretched-link"
+                >Continue reading</a
+              >
+            </div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:2 %}
+      </div>
+      <div class="row my-2">{% endif %} {% endfor %}</div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

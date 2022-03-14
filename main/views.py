@@ -11,14 +11,14 @@ def about(request):
 
 
 def blog(request):
-    return render(request, 'main/blog.html')
+    return render(request, 'blog/blog.html')
 
 
 def gallery(request):
     return render(request, 'main/gallery.html')
 
 
-def shop(request):
+def service(request):
     return render(request, 'main/service.html')
 
 

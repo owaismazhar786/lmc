@@ -1,12 +1,12 @@
-# from django.http.response import HttpResponse
-from django.shortcuts import render
-
-from blog.models import blogpost
-
-# Create your views here.
+from django.views import generic
+from .models import Post
 
 
-def blog(request):
-    posts = blogpost.objects.all()
-    print(posts)
-    return render(request, 'blog/blog.html', {'posts': posts})
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'blog/index.html'
+
+
+class PostDetail(generic.DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html'
