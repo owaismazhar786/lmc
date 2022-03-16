@@ -35,3 +35,11 @@ def contact(request):
         contact.message = message
         contact.save()
     return render(request, 'main/contact.html')
+
+
+def privacy(request):
+    return render(request, 'main/Privacypolicy.html')
+
+
+def Terms(request):
+    return render(request, 'main/Termsofuse.html')
