@@ -43,3 +43,7 @@ def privacy(request):
 
 def Terms(request):
     return render(request, 'main/Termsofuse.html')
+
+
+def error_404(request, exception):
+    return render('main/404.html')
