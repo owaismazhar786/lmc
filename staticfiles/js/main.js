@@ -1,126 +1,137 @@
-/** 
- * ===================================================================
- * Main js
- *
- * ------------------------------------------------------------------- 
- */ 
+(function ($) {
+    "use strict";
+    
+    // Initiate the wowjs
+    new WOW().init();
+    
+    
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 200) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
+    });
+    $('.back-to-top').click(function () {
+        $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+        return false;
+    });
+    
+    
+    // Sticky Navbar
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 90) {
+            $('.nav-bar').addClass('nav-sticky');
+            $('.carousel, .page-header').css("margin-top", "73px");
+        } else {
+            $('.nav-bar').removeClass('nav-sticky');
+            $('.carousel, .page-header').css("margin-top", "0");
+        }
+    });
+    
+    
+    // Dropdown on mouse hover
+    $(document).ready(function () {
+        function toggleNavbarMethod() {
+            if ($(window).width() > 992) {
+                $('.navbar .dropdown').on('mouseover', function () {
+                    $('.dropdown-toggle', this).trigger('click');
+                }).on('mouseout', function () {
+                    $('.dropdown-toggle', this).trigger('click').blur();
+                });
+            } else {
+                $('.navbar .dropdown').off('mouseover').off('mouseout');
+            }
+        }
+        toggleNavbarMethod();
+        $(window).resize(toggleNavbarMethod);
+    });
+    
+    
+    // jQuery counterUp
+    $('[data-toggle="counter-up"]').counterUp({
+        delay: 10,
+        time: 2000
+    });
+    
+    
+    // Modal Video
+    $(document).ready(function () {
+        var $videoSrc;
+        $('.btn-play').click(function () {
+            $videoSrc = $(this).data("src");
+        });
+        console.log($videoSrc);
 
-(function($) {
+        $('#videoModal').on('shown.bs.modal', function (e) {
+            $("#video").attr('src', $videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0");
+        })
 
-	"use strict";
-
-	/* --------------------------------------------------- */
-	/* Preloader
-	------------------------------------------------------ */ 
-   $(window).load(function() {
-      // will first fade out the loading animation 
-    	$("#loader").fadeOut("slow", function(){
-
-        // will fade out the whole DIV that covers the website.
-        $("#preloader").delay(300).fadeOut("slow");
-
-      }); 
-  	})
-
-
-  	/* --------------------------------------------------- */
-	/*  Placeholder Plugin Settings
-	------------------------------------------------------ */
-	$('input, textarea, select').placeholder()  
-
-
-  	/*---------------------------------------------------- */
-  	/* FitText Settings
-  	------------------------------------------------------ */  
-  	setTimeout(function() {
-
-   	$('.main-content h1').fitText(.8, { minFontSize: '42px', maxFontSize: '94px' });
-
-  	}, 100);
-
-
-  	/* --------------------------------------------------- */
-	/* lettering js
-	------------------------------------------------------ */
-	$(".kern-this").lettering(); 
-
-
-	/* --------------------------------------------------- */
-  	/* Menu
-   ------------------------------------------------------ */  
-   var toggleButton = $('.menu-toggle'),
-       nav = $('#menu-nav-wrap'),
-       mainContent = $('#main-404-content'),
-       mainHeader = $('.main-header');
-
-	// open-close menu by clicking on the menu icon
-	toggleButton.on('click', function(e){
-
-		e.preventDefault();
-
-		toggleButton.toggleClass('is-clicked');
-		nav.toggleClass('menu-is-open');
-		mainHeader.toggleClass('menu-is-open');
-		mainContent.toggleClass('menu-is-open').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-			// firefox transitions break when parent overflow is changed, 
-			// so we need to wait for the end of the trasition to give the body an overflow hidden
-			$('body').toggleClass('overflow-hidden');
-		});
-			
-		// check if transitions are not supported 
-		if($('html').hasClass('no-csstransitions')) {
-			$('body').toggleClass('overflow-hidden');
-		}
-
-	});
-
-	// close menu clicking outside the menu itself
-	mainContent.on('click', function(e){
-
-		if( !$(e.target).is('.menu-toggle, .menu-toggle span') ) {
-
-			toggleButton.removeClass('is-clicked');
-			nav.removeClass('menu-is-open');
-			mainHeader.removeClass('menu-is-open');
-			mainContent.removeClass('menu-is-open').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-				$('body').removeClass('overflow-hidden');
-			});
-			
-			// check if transitions are not supported
-			if($('html').hasClass('no-csstransitions')) {
-				$('body').removeClass('overflow-hidden');
-			}
-
-		}
-	});
+        $('#videoModal').on('hide.bs.modal', function (e) {
+            $("#video").attr('src', $videoSrc);
+        })
+    });
 
 
-   /* --------------------------------------------------- */
-	/*  Vegas Slideshow
-	------------------------------------------------------ */
-	$(".main-content-slides").vegas({
-		transition: 'fade',
-		transitionDuration: 2500,
-		delay: 5000,
-    	slides: [
-       	{ src: "images/slides/woods.jpg" },
-        	{ src: "images/slides/greens.jpg" },
-        	{ src: "images/slides/dandelion.jpg" }
-    	]
-	});
+    // Testimonial Slider
+    $('.testimonial-slider').slick({
+        infinite: true,
+        autoplay: true,
+        arrows: false,
+        dots: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        asNavFor: '.testimonial-slider-nav'
+    });
+    $('.testimonial-slider-nav').slick({
+        arrows: false,
+        dots: false,
+        focusOnSelect: true,
+        centerMode: true,
+        centerPadding: '22px',
+        slidesToShow: 3,
+        asNavFor: '.testimonial-slider'
+    });
+    $('.testimonial .slider-nav').css({"position": "relative", "height": "160px"});
+    
+    
+    // Blogs carousel
+    $(".related-slider").owlCarousel({
+        autoplay: true,
+        dots: false,
+        loop: true,
+        nav : true,
+        navText : [
+            '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+            '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+        ],
+        responsive: {
+            0:{
+                items:1
+            },
+            576:{
+                items:1
+            },
+            768:{
+                items:2
+            }
+        }
+    });
+    
+    
+    // Portfolio isotope and filter
+    var portfolioIsotope = $('.portfolio-container').isotope({
+        itemSelector: '.portfolio-item',
+        layoutMode: 'fitRows'
+    });
 
+    $('#portfolio-flters li').on('click', function () {
+        $("#portfolio-flters li").removeClass('filter-active');
+        $(this).addClass('filter-active');
 
-   /* --------------------------------------------------- */
-	/*  Particle JS
-	------------------------------------------------------ */
-	$('.main-content-particle-js').particleground({
-	    dotColor: '#fff',
-	    lineColor: '#555555',
-	    particleRadius: 6,
-	    curveLines: true,
-	    density: 9000,
-	    proximity: 100
-	});  	
- 
-
+        portfolioIsotope.isotope({filter: $(this).data('filter')});
+    });
+    
 })(jQuery);
+
