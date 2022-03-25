@@ -1,1 +1,0 @@
-web: gunicorn lmc.wsgi --log-file -
