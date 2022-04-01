@@ -1,5 +1,14 @@
 from django.db import models
-# Create your models here.
+from django.forms import CharField
+from embed_video.fields import EmbedVideoField
+
+
+class Videos(models.Model):
+    video = EmbedVideoField()
+    title = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title
 
 
 class Contact(models.Model):

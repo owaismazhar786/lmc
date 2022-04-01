@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from . models import Contact
+from django.http import HttpResponse
+from . models import Contact, Videos
 
 
 def home(request):
@@ -15,7 +16,9 @@ def blog(request):
 
 
 def gallery(request):
-    return render(request, 'main/gallery.html')
+    videos = Videos.objects.all()
+    context = {'videos': videos}
+    return render(request, 'main/gallery.html', context)
 
 
 def service(request):
@@ -34,6 +37,7 @@ def contact(request):
         contact.subject = subject
         contact.message = message
         contact.save()
+        return render(request, 'main/thanks.html')
     return render(request, 'main/contact.html')
 
 
