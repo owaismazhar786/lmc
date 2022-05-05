@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from . models import Contact, Videos
+from . models import *
 
 
 def home(request):
@@ -16,7 +16,7 @@ def blog(request):
 
 
 def gallery(request):
-    videos = Videos.objects.all()
+    videos = Video.objects.all()
     context = {'videos': videos}
     return render(request, 'main/gallery.html', context)
 
@@ -40,6 +40,21 @@ def contact(request):
         return render(request, 'main/thanks.html')
     return render(request, 'main/contact.html')
 
+def developer(request):
+    if request.method == 'POST':
+        contact = Developer()
+        name = request.POST.get('username')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('usermessage')
+        contact.name = name
+        contact.email = email
+        contact.subject = subject
+        contact.message = message
+        contact.save()
+        return render(request, 'main/thanks.html')
+    return render(request, 'main/developer.html')
+
 
 def privacy(request):
     return render(request, 'main/Privacypolicy.html')
@@ -49,5 +64,5 @@ def Terms(request):
     return render(request, 'main/Termsofuse.html')
 
 
-def error_404(request, exception):
-    return render('main/404.html')
+def page_404(request, exception):
+    return render(request,'main/404.html')

@@ -1,43 +1,55 @@
 {% extends 'main/main.html' %}{% load static %} {% block content %}
 
 <div class="container">
-  <div class="row mt-4">
-    <div class="col-md-8 blog-main">
-      <div class="blog-post">
-        <h2 class="blog-post-title">{{ object.title }}</h2>
-        <p class="text-muted">{{ post.author }} | {{ post.created_on }}</p>
-        <img
-          src="/media/{{post.thumbnail}}"
-          class="img-thumbnail"
-          style="width: 200; height: 200"
-          aria-label="Placeholder: Thumbnail"
-        />
-        <p class="card-text text-justify">{{ object.content | safe }}</p>
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <img src="/media/{{post.thumbnail}}" class="img-thumbnail" style="width: 200; height: 200"
+          aria-label="Placeholder: Thumbnail" />
+        <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+
+        <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
+        <p class="card-text  text-justify">{{ post.content | safe }}</p>
       </div>
-      <!-- /.blog-post -->
     </div>
-    <!-- /.blog-main -->
 
-    <aside class="col-md-4 blog-sidebar">
-      <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="font-italic">About</h4>
-        <p class="mb-0">
-          Labaik Media Cell
-          <em>started out as a middle projects and is now</em> the fastest
-          growing Islamic studio of all times in Pakistan.
-        </p>
-      </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        <!-- comments -->
+        <h2>{{ comments.count }} comments</h2>
 
-      <div class="p-4">
-        <h4 class="font-italic">Elsewhere</h4>
-        <ol class="list-unstyled">
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Facebook</a></li>
-        </ol>
+        {% for comment in comments %}
+        <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            {{ comment.name }}
+            <span class=" text-muted font-weight-normal">
+              {{ comment.created_on }}
+            </span>
+          </p>
+          {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
       </div>
-    </aside>
-    <!-- /.blog-sidebar -->
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Your comment is awaiting moderation
+        </div>
+        {% else %}
+        <h3>Leave a comment</h3>
+        {% load crispy_forms_tags %}
+        
+        <form method="post" style="margin-top: 1.3em;">
+          {{ comment_form | crispy }}
+          {% csrf_token %}
+          <input type="submit" class="btn btn-success  btn-lg">
+        </form>
+
+        {% endif %}
+      </div>
+    </div>
   </div>
 </div>
 

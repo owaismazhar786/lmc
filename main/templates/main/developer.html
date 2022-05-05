@@ -1,0 +1,92 @@
+{% extends 'main/main.html' %} {% load static %} {%block content %}
+<!-- Page Header Start -->
+<div class="page-header" style="font-family: Times New Roman, Times, serif; background: #acc;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="col-12">
+                <a href="/">Home</a>
+                <a href="/contact-developer">Developer Contact</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Contact Start -->
+<div class="contact wow fadeInUp" style="font-family: Times New Roman, Times, serif">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>For Any Query</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="flaticon-address"></i>
+                        <div class="contact-text">
+                            <h2>Location</h2>
+                            <p>Mandi Bahauddin</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="flaticon-call"></i>
+                        <div class="contact-text">
+                            <h2>Phone</h2>
+                            <p>+92 317 7765618</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="flaticon-send-mail"></i>
+                        <div class="contact-text">
+                            <h2>Email</h2>
+                            <p>owaisraza78617@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="background-color: springgreen;">
+                <div class="contact-form" style="background-color: springgreen;">
+                    <div id="success"></div>
+                    <form name="sentMessage" method="POST" id="contactForm">
+                        {% csrf_token %}
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="name" name="username" placeholder="Your Name"
+                                data-validation-required-message="Please enter your name" style="color: black"
+                                required />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Your Email"
+                                data-validation-required-message="Please enter your email" style="color: black"
+                                required />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject"
+                                data-validation-required-message="Please enter a subject" style="color: black"
+                                required />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" id="message" name="usermessage" placeholder="Message"
+                                data-validation-required-message="Please enter your message" style="color: black"
+                                required /></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn" style="background-color: orangered;" type="submit" id="sendMessageButton">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+{% endblock %}
