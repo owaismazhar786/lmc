@@ -11,6 +11,8 @@ def post_detail(request, slug):
     new_comment = None
     # Comment posted
     if request.method == 'POST':
+        seo_text = request.POST.get('description')
+        seo_keywords = request.POST.get('keywords')
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
 

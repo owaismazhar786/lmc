@@ -16,6 +16,7 @@ class Contact(models.Model):
     email = models.EmailField(null=False)
     subject = models.CharField(max_length=50, null=False)
     message = models.TextField(null=False)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -25,6 +26,7 @@ class Developer(models.Model):
     email = models.EmailField(null=False)
     subject = models.CharField(max_length=50, null=False)
     message = models.TextField(null=False)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name

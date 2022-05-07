@@ -10,6 +10,8 @@ STATUS = (
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
+    seo_text = models.CharField(max_length=200, unique=True)
+    seo_keywords = models.TextField()
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='blog_posts')
     thumbnail = models.ImageField(upload_to='blog/images', default="")

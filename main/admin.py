@@ -1,3 +1,4 @@
+import sre_compile
 from django.contrib import admin
 from . models import *
 from embed_video.admin import AdminVideoMixin
@@ -11,12 +12,13 @@ class MyModelAdmin(AdminVideoMixin, admin.ModelAdmin):
 
 admin.site.register(Video, MyModelAdmin)
 
+
+@admin.register(Contact)
 class contactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'subject')
+    list_display = ('name', 'email','subject')
+    search_fields = ('name', 'email')
 
-admin.site.register(Contact)
-
-admin.site.register(Developer)
-
+@admin.register(Developer)
 class developerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'subject')
+    list_display = ('name', 'email', 'subject', 'message')
+    search_fields = ('name', 'email', 'message')
